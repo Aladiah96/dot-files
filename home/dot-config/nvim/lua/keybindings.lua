@@ -16,3 +16,6 @@ map("n", "<Leader>F", ":Telescope live_grep<CR>", opts)
 
 -- Keep Neovim's default bindings like / for search
 map("n", "/", "/", opts)
+
+-- Accept copilot suggestion with <Tab>
+map("i", "<Tab>", 'copilot#Accept("<Tab>")', { expr = true, silent = true })

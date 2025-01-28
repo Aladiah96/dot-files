@@ -13,6 +13,24 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+	-- Rose Pine theme
+  {
+    "rose-pine/neovim",
+    as = "rose-pine",
+    config = function()
+	    require("rose-pine").setup({
+		    variant = "moon",
+		    disable_background = true,
+		    disable_float_background = false,
+		    styles = {
+			    bold = true,
+			    italic = false,
+			    transparency = true
+		    },
+	    })
+      vim.cmd("colorscheme rose-pine")
+    end,
+  },
   -- File Explorer
   {
     "nvim-tree/nvim-tree.lua",
