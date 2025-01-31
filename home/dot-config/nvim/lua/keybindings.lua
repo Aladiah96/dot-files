@@ -17,5 +17,7 @@ map("n", "<Leader>F", ":Telescope live_grep<CR>", opts)
 -- Keep Neovim's default bindings like / for search
 map("n", "/", "/", opts)
 
--- Accept copilot suggestion with <Tab>
-map("i", "<Tab>", 'copilot#Accept("<Tab>")', { expr = true, silent = true })
+-- For shift-tab to dedent in normal and visual mode
+map("n", "<S-Tab>", "<<", opts)
+map("v", "<S-Tab>", "<gv", opts)
+map("i", "<S-Tab>", "<C-d>", opts)

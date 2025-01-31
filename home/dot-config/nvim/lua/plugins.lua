@@ -41,13 +41,13 @@ require("lazy").setup({
   },
 
   -- Copilot
-  {
-    "github/copilot.vim",
-    config = function()
-      vim.g.copilot_no_tab_map = true
-      vim.g.copilot_assume_mapped = true
-    end,
-  },
+--  {
+--    "github/copilot.vim",
+--    config = function()
+--      vim.g.copilot_no_tab_map = true
+--      vim.g.copilot_assume_mapped = true
+--    end,
+--  },
 
   -- Telescope (for fuzzy finding)
   {
@@ -63,6 +63,70 @@ require("lazy").setup({
     "folke/which-key.nvim",
     config = function()
       require("which-key").setup()
+    end,
+  },
+  {
+    "windwp/nvim-autopairs",
+    config = function()
+      require("nvim-autopairs").setup()
+    end,
+  },
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      "jose-elias-alvarez/null-ls.nvim",
+    },
+    config = function()
+      require("mason").setup()
+      require("mason-lspconfig").setup({
+        ensure_installed = { "volar", "ts_ls", "eslint" },
+      })
+      local lspconfig = require("lspconfig")
+      lspconfig.volar.setup({})
+      lspconfig.ts_ls.setup({})
+      lspconfig.eslint.setup({})
+      local null_ls = require("null-ls")
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.diagnostics.eslint,
+          null_ls.builtins.formatting.prettier,
+        },
+      })
+    end,
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
+      "L3MON4D3/luasnip",
+      "rafamadriz/friendly-snippets",
+    },
+    config = function()
+      require("luasnip.loaders.from_vscode").lazy_load()  -- Loads friendly-snippets
+      local cmp = require("cmp")
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            require("luasnip").lsp_expand(args.body)
+          end,
+        },
+        mapping = {
+          ["<Tab>"] = cmp.mapping.select_next_item(),
+          ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+          ["<CR>"] = cmp.mapping.confirm({ select = false }),
+        },
+        sources = {
+          { name = "nvim_lsp" },
+          { name = "buffer" },
+          { name = "path" },
+          { name = "luasnip" },
+        },
+      })
     end,
   },
 })
