@@ -21,3 +21,11 @@ map("n", "/", "/", opts)
 map("n", "<S-Tab>", "<<", opts)
 map("v", "<S-Tab>", "<gv", opts)
 map("i", "<S-Tab>", "<C-d>", opts)
+
+-- Yank to system clipboard
+vim.api.nvim_set_keymap('n', 'y', '"+y', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'y', '"+y', { noremap = true, silent = true })
+
+-- Paste from system clipboard
+vim.api.nvim_set_keymap('n', 'p', '"+p', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'P', '"+P', { noremap = true, silent = true })
