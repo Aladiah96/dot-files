@@ -39,16 +39,6 @@ require("lazy").setup({
       require("nvim-tree").setup()
     end,
   },
-
-  -- Copilot
---  {
---    "github/copilot.vim",
---    config = function()
---      vim.g.copilot_no_tab_map = true
---      vim.g.copilot_assume_mapped = true
---    end,
---  },
-
   -- Telescope (for fuzzy finding)
   {
     "nvim-telescope/telescope.nvim",
@@ -98,6 +88,7 @@ require("lazy").setup({
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
       vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
+      vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = true }) end, { noremap = true, silent = true })
     end,
   },
   {
@@ -215,5 +206,10 @@ require("lazy").setup({
       require("bufferline").setup({})
     end,
   },
-  {"mbbill/undotree"}
+  {"mbbill/undotree"},
+  {"mg979/vim-visual-multi"},
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false,
+  }
 })

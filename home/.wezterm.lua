@@ -9,7 +9,16 @@ local config = wezterm.config_builder()
 config.window_background_opacity = 1
 config.hide_tab_bar_if_only_one_tab = true
 
--- config.color_scheme = 'Gruvbox dark, medium (base16)'
+config.color_scheme = 'nord'
 config.font = wezterm.font 'Geist Mono'
+config.font_size = 11.0
+
+-- window padding
+config.window_padding = {
+  left = 0,
+  right = 0,
+  top = 0,
+  bottom = 0,
+}
 
 return config
